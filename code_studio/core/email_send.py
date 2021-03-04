@@ -6,7 +6,7 @@ from code_studio.config import email, password
 #
 # smtpObj.starttls()
 #
-# smtpObj.login('blooomed@gmail.com', '4815162342')
+# smtpObj.login(email, password')
 #
 # smtpObj.sendmail('blooomed@gmail.com', "get-moscow@yandex.ru", "fuck you!")
 #
@@ -39,4 +39,5 @@ if __name__ == "__main__":
     to_addr = "get-moscow@yandex.ru"
     from_addr = email
     body_text = "Python rules them all!"
-    send_email(subject="Test email from Python", to_addr= "get-moscow@yandex.ru", from_addr=email, body_text="Python rules them all!")
+    send_email(subject="Test email from Python", to_addr="get-moscow@yandex.ru", from_addr=email,
+               body_text="Python rules them all!")
