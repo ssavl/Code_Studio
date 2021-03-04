@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <title>Страница продукта</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@400;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{% static "/css/style.css" %}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="content">
+            <a href="/" class="go-back">На главную</a>
+            <h1>Какой-то продукт</h1>
+            <img src="{% static "images/product.jpg" %}"  alt="Какой-то продукт" class="product-image">
+            <div class="product-info">
+                <div class="product-info-item">
+                    <h2>Заголовк списка №1</h2>
+                    <ul>
+                        <li>Супер длинный первый пункт списка, такой, чтобы переносился</li>
+                        <li>Второй пункт списка</li>
+                        <li>Третий пункт списка</li>
+                    </ul>
+                </div>
+                <div class="product-info-item">
+                    <h2>Заголовк списка №2</h2>
+                    <ul>
+                        <li>Первый пункт списка</li>
+                        <li>Второй пункт списка</li>
+                    </ul>
+                </div>
+                <div class="product-info-item">
+                    <h2>Заголовк списка №3</h2>
+                    <ul>
+                        <li>Первый пункт списка</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
