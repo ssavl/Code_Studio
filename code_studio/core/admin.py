@@ -3,6 +3,5 @@ from .models import *
 
 
 admin.site.register(HomePage)
-admin.site.register(ProductPage)
 
 

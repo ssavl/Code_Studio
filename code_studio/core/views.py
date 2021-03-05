@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from .models import *
+from .models import HomePage
+from items.models import Item
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 # from email_send import email_sender
 # from config import email, password
-
+from django.utils import timezone
+from django.core.exceptions import ObjectDoesNotExist
 
 
 
@@ -29,46 +31,93 @@ def start(request):
 
     page_text = []
 
-    if HomePage.objects.latest('id').text:
+    try:
         for i in HomePage.objects.latest('id').text.split('\r\n'):
             if i ==  '':
                 continue
             else:
                 page_text.append(i)
+    except ObjectDoesNotExist:
+        pass
 
-    if HomePage.objects.latest('id').title and HomePage.objects.latest('id').latitude and \
-            HomePage.objects.latest('id').longitude and HomePage.objects.latest('id').first_img.url and \
-            HomePage.objects.latest('id').second_img.url and HomePage.objects.latest('id').third_img.url and \
-            HomePage.objects.latest('id').fourth_img.url:
-        ctx = {
-            'title': HomePage.objects.latest('id').title,
-            'text_under_slider': page_text,
-            'latitude': HomePage.objects.latest('id').latitude,
-            'longitude': HomePage.objects.latest('id').longitude,
-            'slider1': HomePage.objects.latest('id').first_img.url,
-            'slider2': HomePage.objects.latest('id').second_img.url,
-            'slider3': HomePage.objects.latest('id').third_img.url,
-            'slider4': HomePage.objects.latest('id').fourth_img.url,
-            'product_1': "Супер продукт",
-            'product_2': "Афигенный продукт",
-            'product_3': "Просто класс продукт",
-            'product_4': "Надо брать продукт",
-            'product_5': "Вот это да! продукт",
-        }
-    else:
-        ctx = {}
+    try:
+        keywords_page = HomePage.objects.latest('id').keywords_page
+    except ObjectDoesNotExist:
+        keywords_page = ''
+
+    try:
+        description_page = HomePage.objects.latest('id').description_page
+    except ObjectDoesNotExist:
+        description_page = ''
+
+    try:
+        title_tag = HomePage.objects.latest('id').title_tag
+    except ObjectDoesNotExist:
+        title_tag = ''
+
+    try:
+        title = HomePage.objects.latest('id').title
+    except ObjectDoesNotExist:
+        title = 'Тут будет заголовок'
+
+    try:
+        latitude = HomePage.objects.latest('id').latitude
+    except ObjectDoesNotExist:
+        latitude = 50
+
+    try:
+        longitude = HomePage.objects.latest('id').longitude
+    except ObjectDoesNotExist:
+        longitude = 60
+
+    try:
+        slider1 = HomePage.objects.latest('id').first_img.url
+    except ObjectDoesNotExist:
+        slider1 = None
+
+    try:
+        slider2 = HomePage.objects.latest('id').second_img.url
+    except ObjectDoesNotExist:
+        slider2 = None
+
+    try:
+        slider3 = HomePage.objects.latest('id').third_img.url
+    except ObjectDoesNotExist:
+        slider3 = None
+
+    try:
+        slider4 = HomePage.objects.latest('id').fourth_img.url
+    except ObjectDoesNotExist:
+        slider4 = None
+
+    try:
+        products = Item.objects.filter().order_by('-created_at')
+    except ObjectDoesNotExist:
+        products = ["Тут будет первый Продукт", "Тут будет второй продукт"]
+
+
+
+
+
+
+    ctx = {
+        'keywords_page': keywords_page,
+        'description_page': description_page,
+        'title_tag': title_tag,
+        'title': title,
+        'text_under_slider': page_text,
+        'latitude': latitude,
+        'longitude': longitude,
+        'slider1': slider1,
+        'slider2': slider2,
+        'slider3': slider3,
+        'slider4': slider4,
+        'products': products,
+    }
+
 
     return render(request, 'index.html', context=ctx)
 
-
-
-# def product(request, id):
-#     ctx = {
-#         # 'title': HomePageTitle.objects.latest('id'),
-#         # 'text_under_slider': TextUnderSlider.objects.latest('id'),
-#         # 'coords': Coord.objects.latest('id'),
-#     }
-#     return render(request, 'product.html', context=ctx)
 
 
 def test(request):
@@ -79,4 +128,3 @@ def test(request):
 
 
 
-# Coord.objects.latest('id'),

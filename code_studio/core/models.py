@@ -6,20 +6,6 @@ from django_resized import ResizedImageField
 
 
 
-class ProductPage(models.Model):
-    keywords_page = models.CharField('Keyword', max_length=50, default=None)
-    description_page = models.CharField('Description', max_length=50, default=None)
-    title_tag = models.CharField('title_tag', max_length=50, default=None)
-
-
-    def __str__(self):
-        return f"Страница Продуктов_#{random.randint(1, 999)}"
-
-
-class MyResize(ResizedImageField):
-    pass
-
-
 class HomePage(models.Model):
     keywords_page = models.CharField('Keyword', max_length=50, default=None)
     description_page = models.CharField('Description', max_length=50, default=None)
@@ -41,4 +27,3 @@ class HomePage(models.Model):
 
 
 
-# validators=[file_size]

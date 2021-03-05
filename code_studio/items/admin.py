@@ -1,8 +1,7 @@
-from django.contrib import admin
+from custom_admin.admin import admin_site
 from .models import *
 
 
 
-# admin.site.register(Item)
-# admin.site.register(Point)
-
+admin_site.register(Item)
+admin_site.register(Point)
