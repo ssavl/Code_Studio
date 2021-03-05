@@ -1,14 +1,31 @@
 from django.shortcuts import render
 from .models import *
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+# from email_send import email_sender
+# from config import email, password
 
+
+
+
+def email_sender(name, to_email):
+    msg = MIMEMultipart()
+
+    message = f'Привет! {name}, это тестовая работа Степуры Савелия!'
+
+    msg.attach(MIMEText(message, 'plain'))
+
+    server = smtplib.SMTP('smtp.gmail.com: 587')
+    server.starttls()
+    server.login('email', 'password')
+    server.sendmail('email', to_email, msg.as_string())
+    server.quit()
 
 
 def start(request):
     if request.method == 'POST':
-        # if form.is_valid:
-        print('У нас POST запрос')
-        print(request.POST['name'])
-        print(request.POST['email'])
+        email_sender(str(request.POST['name']), str(request.POST['email']))
 
     page_text = []
 
@@ -45,13 +62,21 @@ def start(request):
 
 
 
-def product(request, id):
+# def product(request, id):
+#     ctx = {
+#         # 'title': HomePageTitle.objects.latest('id'),
+#         # 'text_under_slider': TextUnderSlider.objects.latest('id'),
+#         # 'coords': Coord.objects.latest('id'),
+#     }
+#     return render(request, 'product.html', context=ctx)
+
+
+def test(request):
     ctx = {
-        # 'title': HomePageTitle.objects.latest('id'),
-        # 'text_under_slider': TextUnderSlider.objects.latest('id'),
-        # 'coords': Coord.objects.latest('id'),
+        'data': 'whatever'
     }
-    return render(request, 'product.html', context=ctx)
+    return render(request, 'custom_page_admin.html', context=ctx)
+
 
 
 # Coord.objects.latest('id'),

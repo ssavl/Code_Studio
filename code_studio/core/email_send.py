@@ -1,43 +1,22 @@
 import smtplib
-from code_studio.config import email, password
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from config import email, password
 
 
-# smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
-#
-# smtpObj.starttls()
-#
-# smtpObj.login(email, password')
-#
-# smtpObj.sendmail('blooomed@gmail.com', "get-moscow@yandex.ru", "fuck you!")
-#
-# smtpObj.quit()
-#
-# import smtplib
+def email_sender(name, to_email):
+    msg = MIMEMultipart()
 
+    message = f'Привет! {name}, это тестовая работа Степуры Савелия!'
 
-def send_email(subject, to_addr, from_addr, body_text):
-    """
-    Send an email
-    """
+    msg.attach(MIMEText(message, 'plain'))
 
-    BODY = "\r\n".join((
-        "From: %s" % from_addr,
-        "To: %s" % to_addr,
-        "Subject: %s" % subject,
-        "",
-        body_text
-    ))
-
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.sendmail(from_addr, [to_addr], BODY)
+    server = smtplib.SMTP('smtp.gmail.com: 587')
+    server.starttls()
+    server.login(email, password)
+    server.sendmail(email, to_email, msg.as_string())
     server.quit()
 
 
-if __name__ == "__main__":
-    # host = "mySMTP.server.com"
-    subject = "Test email from Python"
-    to_addr = "get-moscow@yandex.ru"
-    from_addr = email
-    body_text = "Python rules them all!"
-    send_email(subject="Test email from Python", to_addr="get-moscow@yandex.ru", from_addr=email,
-               body_text="Python rules them all!")
+
+

@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.exceptions import ValidationError
 from django.db import models
 import random
 from django_resized import ResizedImageField
@@ -15,6 +15,9 @@ class ProductPage(models.Model):
     def __str__(self):
         return f"Страница Продуктов_#{random.randint(1, 999)}"
 
+
+class MyResize(ResizedImageField):
+    pass
 
 
 class HomePage(models.Model):
@@ -38,4 +41,4 @@ class HomePage(models.Model):
 
 
 
-
+# validators=[file_size]
