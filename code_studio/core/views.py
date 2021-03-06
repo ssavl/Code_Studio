@@ -120,11 +120,7 @@ def start(request):
 
 
 
-def test(request):
-    ctx = {
-        'data': 'whatever'
-    }
-    return render(request, 'custom_page_admin.html', context=ctx)
+
 
 
 

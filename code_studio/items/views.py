@@ -4,51 +4,51 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 
-def product(request, id):
+def product(request, slug_item):
     try:
-        keywords_page = Item.objects.latest('id').keywords_page
+        keywords_page = Item.objects.latest('slug').keywords_page
     except ObjectDoesNotExist:
         keywords_page = ''
 
     try:
-        description_page = Item.objects.latest('id').description_page
+        description_page = Item.objects.latest('slug').description_page
     except ObjectDoesNotExist:
         description_page = ''
 
     try:
-        title_tag = Item.objects.latest('id').title_tag
+        title_tag = Item.objects.latest('slug').title_tag
     except ObjectDoesNotExist:
         title_tag = ''
     try:
-        name = Item.objects.get(id=id).name
+        name = Item.objects.get(slug=slug_item).name
     except ObjectDoesNotExist:
         name = 'Тут будет имя товара'
     try:
-        img = Item.objects.get(id=id).img.url
+        img = Item.objects.get(slug=slug_item).img.url
     except ObjectDoesNotExist:
         img = None
     try:
-        title = Item.objects.get(id=id).title
+        title = Item.objects.get(slug=slug_item).title
     except ObjectDoesNotExist:
         title = ''
     try:
-        title2 = Item.objects.get(id=id).title2
+        title2 = Item.objects.get(slug=slug_item).title2
     except ObjectDoesNotExist:
         title2 = ''
     try:
-        title3 = Item.objects.get(id=id).title3
+        title3 = Item.objects.get(slug=slug_item).title3
     except ObjectDoesNotExist:
         title3 = ''
     try:
-        points = Point.objects.filter(item=Item.objects.get(id=id), title_num=1)
+        points = Point.objects.filter(item=Item.objects.get(slug=slug_item), title_num=1)
     except ObjectDoesNotExist:
         points = ''
     try:
-        points2 = Point.objects.filter(item=Item.objects.get(id=id), title_num=2)
+        points2 = Point.objects.filter(item=Item.objects.get(slug=slug_item), title_num=2)
     except ObjectDoesNotExist:
         points2 = ''
     try:
-        points3 = Point.objects.filter(item=Item.objects.get(id=id), title_num=3)
+        points3 = Point.objects.filter(item=Item.objects.get(slug=slug_item), title_num=3)
     except ObjectDoesNotExist:
         points3 = ''
 
