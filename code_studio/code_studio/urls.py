@@ -13,7 +13,6 @@ from items.views import product
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('admin/test', views.test),
     path('', views.start),
     path('product/<slug:slug_item>', product),
 ]

@@ -33,7 +33,7 @@ class HomePage(models.Model):
 
 
     def __str__(self):
-        return f"Главная страница_#{random.randint(1, 999)}"
+        return f"Главная страница_#{self.id}"
 
 
 
