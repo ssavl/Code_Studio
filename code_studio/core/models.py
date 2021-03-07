@@ -8,12 +8,10 @@ from django.core.validators import FileExtensionValidator
 
 
 class HomePage(models.Model):
-    """
-    Главная страница
-    """
-    keywords_page = models.CharField('Keyword', max_length=50, default=None, blank=True)
-    description_page = models.CharField('Description', max_length=50, default=None, blank=True)
-    title_tag = models.CharField('title_tag', max_length=50, default=None, blank=True)
+
+    keywords_page = models.CharField('Ключевые слова', max_length=50, default=None, blank=True)
+    description_page = models.CharField('Описание', max_length=50, default=None, blank=True)
+    title_tag = models.CharField('Тэг', max_length=50, default=None, blank=True)
     title = models.CharField('Заголовок главной страницы', max_length=50, default=None)
     first_img = ResizedImageField('Первое изображение слайдера', size=[1280, 860], crop=['middle', 'center'], upload_to='media', default=None, blank=True, null=True, validators=[
             FileExtensionValidator(allowed_extensions=['jpg', 'jpeg'], message='Можно загрузить только формат jpeg')
@@ -31,9 +29,14 @@ class HomePage(models.Model):
     longitude = models.CharField('Долгота', max_length=20, default=None, blank=True)
     text = models.TextField("Текст под слайдером", max_length=500, default=None, blank=True)
 
+    class Meta:
+        verbose_name = 'Домашняя страница'
+        verbose_name_plural = 'Домашняя страница'
+
+
 
     def __str__(self):
-        return f"Главная страница_#{self.id}"
+        return f"Домашняя страница"
 
 
 

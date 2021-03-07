@@ -63,38 +63,28 @@ validate_file = FileValidator(max_size=2097152)
 
 
 class Item(models.Model):
-    keywords_page = models.CharField('Keyword', max_length=50, default=None, blank=True)
-    description_page = models.CharField('Description', max_length=50, default=None, blank=True)
-    title_tag = models.CharField('title_tag', max_length=50, default=None, blank=True)
+    keywords_page = models.CharField('Ключевые слова', max_length=50, default=None, blank=True)
+    description_page = models.CharField('Описание', max_length=50, default=None, blank=True)
+    title_tag = models.CharField('Тэг', max_length=50, default=None, blank=True)
     name = models.CharField('Название', max_length=50)
     slug = models.SlugField(max_length=100, unique=True, db_index=True, verbose_name="URL",)
-    img = ResizedImageField(size=[1280, 1024], crop=['middle', 'center'], upload_to='media', default=None, blank=True,
+    img = ResizedImageField('Изображение', size=[1280, 1024], crop=['middle', 'center'], upload_to='media', default=None, blank=True,
                             null=True, validators=[
             FileExtensionValidator(allowed_extensions=['jpg', 'jpeg'], message='Можно загрузить только формат jpeg'),
             validate_file])
-    created_at = models.DateTimeField(default=datetime.datetime.now)
+    created_at = models.DateTimeField('Дата создания', default=datetime.datetime.now)
     title = models.CharField('Заголовок1', max_length=50, default=None)
     title2 = models.CharField('Заголовок2', max_length=50, default=None, blank=True)
     title3 = models.CharField('Заголовок3', max_length=50, default=None, blank=True)
 
+
+    class Meta:
+        verbose_name = 'Товар'
+        verbose_name_plural = 'Товары'
+
+
     def __str__(self):
         return self.name
-
-
-    def clean_content(self):
-        content = self.cleaned_data['content']
-        print(content)
-        content_type = content.content_type.split('/')[0]
-        print(content_type)
-        # if content_type in settings.CONTENT_TYPES:
-        #     if content._size > settings.MAX_UPLOAD_SIZE:
-        #         raise forms.ValidationError(_('Please keep filesize under %s. Current filesize %s') % (
-        #         filesizeformat(settings.MAX_UPLOAD_SIZE), filesizeformat(content._size)))
-        # else:
-        #     raise forms.ValidationError(_('File type is not supported'))
-        # return content
-
-
 
 
 
@@ -106,9 +96,15 @@ class Point(models.Model):
         ('2', 'Для второго заголовка'),
         ('3', 'Для третьего заголовка')
     ]
-    item = models.ForeignKey(Item, on_delete=models.CASCADE, default=None)
-    title_num = models.CharField(max_length=1, choices=title_num_choises)
-    text = models.TextField(max_length=100)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, default=None, verbose_name='Для какого товара')
+    title_num = models.CharField('Для какого заголовка', max_length=1, choices=title_num_choises)
+    text = models.TextField('Текст заголовка', max_length=100)
+
+
+    class Meta:
+        verbose_name = 'Пункт для заголовка'
+        verbose_name_plural = 'Пункты для заголовка'
+
 
     def __str__(self):
         return self.text
