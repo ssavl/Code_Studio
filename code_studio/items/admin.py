@@ -13,10 +13,27 @@ class AccountAdmin(admin.ModelAdmin):
 
     Model = Item
 
+    actions = ['mark_down', 'mark_up']
 
-    inlines = [
-        PointInline,
-    ]
+    def mark_down(self):
+        pass
+
+    def mark_up(self):
+        pass
+
+    mark_up.short_description = 'марк ап'
+    mark_down.short_description = 'марк даун'
+
+    inlines = [PointInline, ]
+    fieldsets = (
+        ('Основные данные', {
+            'fields': ('name', 'slug')
+        }),
+        ('Дополнительные данные', {
+            'fields': ('keywords_page', 'description_page', 'title_tag', 'img', 'created_at', 'title', 'title2',
+                       'title3')
+        }),
+    )
 
 
     def change_button(self, obj):
@@ -39,10 +56,9 @@ class AccountAdmin(admin.ModelAdmin):
                            f'font-size: 14px; margin: 4px 2px; cursor: pointer;"  '
                            f'href="/admin/items/point/add/">Добавить пункты</a>')
 
-
-    list_display = ('__str__', 'created_at', 'change_button', 'delete_button', 'point_button')
+    list_display = ('name', '__str__', 'created_at', 'change_button', 'delete_button', 'point_button')
     prepopulated_fields = {'slug': ('name',)}
-    search_field = ('name')
+    search_fields = ['name']
 
 
 class MyPoint(admin.ModelAdmin):
