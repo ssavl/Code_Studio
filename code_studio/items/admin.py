@@ -4,10 +4,19 @@ from django.utils.html import format_html
 # from django.core.urlresolvers import reverse
 
 
+class PointInline(admin.TabularInline):
+    model = Point
+
 
 class AccountAdmin(admin.ModelAdmin):
 
+
     Model = Item
+
+
+    inlines = [
+        PointInline,
+    ]
 
 
     def change_button(self, obj):
@@ -31,11 +40,16 @@ class AccountAdmin(admin.ModelAdmin):
                            f'href="/admin/items/point/add/">Добавить пункты</a>')
 
 
-    list_display = ('__str__', 'change_button', 'delete_button', 'point_button')
+    list_display = ('__str__', 'created_at', 'change_button', 'delete_button', 'point_button')
     prepopulated_fields = {'slug': ('name',)}
     search_field = ('name')
 
+
+class MyPoint(admin.ModelAdmin):
+    list_display = ['text', 'item', 'title_num']
+
+
 admin.site.register(Item, AccountAdmin)
-admin.site.register(Point)
+admin.site.register(Point, MyPoint)
 
 

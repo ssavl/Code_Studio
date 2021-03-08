@@ -17,7 +17,11 @@
         <div class="content">
             <a href="/" class="go-back">На главную</a>
             <h1>{{ name }}</h1>
-            <img src="{{ img }}"  alt="Тут будет изображение товара" class="product-image">
+
+            {% if img.img %}
+            	<img src="{{ img.img.url }}"  alt="Тут будет изображение товара" class="product-image">
+            {% endif %}
+
             <div class="product-info">
                 <div class="product-info-item">
                     {% if title %}

@@ -24,7 +24,7 @@ def product(request, slug_item):
     except ObjectDoesNotExist:
         name = 'Тут будет имя товара'
     try:
-        img = Item.objects.get(slug=slug_item).img.url
+        img = Item.objects.get(slug=slug_item)
     except ObjectDoesNotExist:
         img = None
     try:

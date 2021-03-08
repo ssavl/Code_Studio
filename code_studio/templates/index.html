@@ -19,10 +19,23 @@
             <h1>{{ title }}</h1>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="{{ slider1 }}" alt="32453245"></div>
-                    <div class="swiper-slide"><img src="{{ slider2 }}" alt="Вторая картинка"></div>
-                    <div class="swiper-slide"><img src="{{ slider3 }}" alt="Третья картинка"></div>
-                    <div class="swiper-slide"><img src="{{ slider4 }}" alt="Четвертая картинка"></div>
+
+                    {% if slider1.first_img  %}
+                        <div class="swiper-slide"><img src="{{ slider1.first_img.url }}" alt="Первая картинка"></div>
+                    {% endif %}
+
+                    {% if slider2.second_img  %}
+                        <div class="swiper-slide"><img src="{{ slider2.second_img.url }}" alt="Вторая картинка"></div>
+                    {% endif %}
+
+                    {% if slider3.third_img %}
+                    <div class="swiper-slide"><img src="{{ slider3.third_img.url }}" alt="Третья картинка"></div>
+                    {% endif %}
+
+                    {% if slider4.fourth_img  %}
+                        <div class="swiper-slide"><img src="{{ slider4.fourth_img.url }}" alt="Четвертая картинка"></div>
+                    {% endif %}
+
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>

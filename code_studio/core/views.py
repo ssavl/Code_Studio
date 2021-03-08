@@ -71,22 +71,22 @@ def start(request):
         longitude = 60
 
     try:
-        slider1 = HomePage.objects.latest('id').first_img.url
+        slider1 = HomePage.objects.latest('id')
     except ObjectDoesNotExist:
         slider1 = None
 
     try:
-        slider2 = HomePage.objects.latest('id').second_img.url
+        slider2 = HomePage.objects.latest('id')
     except ObjectDoesNotExist:
         slider2 = None
 
     try:
-        slider3 = HomePage.objects.latest('id').third_img.url
+        slider3 = HomePage.objects.latest('id')
     except ObjectDoesNotExist:
         slider3 = None
 
     try:
-        slider4 = HomePage.objects.latest('id').fourth_img.url
+        slider4 = HomePage.objects.latest('id')
     except ObjectDoesNotExist:
         slider4 = None
 
