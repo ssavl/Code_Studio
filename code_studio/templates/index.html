@@ -68,7 +68,18 @@
                 <input type="text" name="email" placeholder="Электронная почта" class="text-box" id="email" onfocus="blurEvent(this)" onkeyup="onChangeEvent(this)">
                 <input type="submit" value="Отправить" class="button" onclick="event.preventDefault();onSubmitEvent()">
             </form>
+
         </div>
+          <br>
+            <br>
+            <hr>
+            <br>
+            <div>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    {{ client_form.as_p }}
+                </form>
+            </div>
     </div>
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=28ba27e6-8179-45dd-8a90-a542e1883e67" type="text/javascript"></script>
 	<script src= "{% static "js/swiper-bundle.min.js" %}"></script>

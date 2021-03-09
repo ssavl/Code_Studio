@@ -8,7 +8,7 @@ from email.mime.multipart import MIMEMultipart
 # from config import email, password
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
-
+from .forms import MyFormClient
 
 
 def email_sender(name, to_email):
@@ -96,11 +96,12 @@ def start(request):
         products = ["Тут будет первый Продукт", "Тут будет второй продукт"]
 
 
-
+    client_form = MyFormClient()
 
 
 
     ctx = {
+        'client_form': client_form,
         'keywords_page': keywords_page,
         'description_page': description_page,
         'title_tag': title_tag,
